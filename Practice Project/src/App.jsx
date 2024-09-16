@@ -2,6 +2,7 @@ import { useState } from "react";
 import Accordian from "./Components/Accordian";
 import "./App.css";
 import RandomColor from "./Components/RandomColor/Index";
+import StarRating from "./Components/Star-Rating/StarRating";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -12,7 +13,9 @@ function App() {
       {/* <Accordian />  */}
       
       {/* Random Color generator */}
-      <RandomColor />
+      {/* <RandomColor /> */}
+
+      <StarRating noOfStar={10}/>
     </div>
   );
 }
