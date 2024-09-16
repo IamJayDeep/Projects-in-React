@@ -1,0 +1,16 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  align-items: center;
+}
+
+.right li {
+  list-style-type: none;
+}
+
+.right ul {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+}
