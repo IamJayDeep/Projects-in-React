@@ -8,10 +8,17 @@ import Toggle from "./Components/Toggle/Toggle";
 import FetchApi from "./Components/Fetch API/FetchApi";
 import Timer from "./Components/Timer/Timer";
 import Todo from "./Components/TODO/todo";
+import BgChanger from "./Components/BgChanger/BgChanger";
+import Router from "./Components/Router/Router";
+import FileUploader from "./Components/FileUploader/FileUploader";
+import Login from "./Components/Login/Login";
+import Search from "./Components/Search/Search";
+import Pagination from "./Components/Pagination/Pagination";
+import data from "./Components/Search/data";
+import ColorPicker from "./Components/ColorPicker/ColorPicker";
+import NavBar from "./Components/ResponsiveNav/NavBar";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div>
       {/* Accordian */}
@@ -30,7 +37,22 @@ function App() {
 
       {/* <Timer /> */}
 
-      <Todo />
+      {/* <Todo /> */}
+
+      {/* <BgChanger /> */}
+
+      {/* <Router /> */}
+
+      {/* <FileUploader /> */}
+
+      {/* <Login /> */}
+      {/* <Search /> */}
+
+      {/* <Pagination data={data} itemPerPage={3} /> */}
+
+      {/* <ColorPicker /> */}
+
+      <NavBar />
     </div>
   );
 }
