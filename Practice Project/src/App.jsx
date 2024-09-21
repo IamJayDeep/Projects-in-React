@@ -17,6 +17,8 @@ import Pagination from "./Components/Pagination/Pagination";
 import data from "./Components/Search/data";
 import ColorPicker from "./Components/ColorPicker/ColorPicker";
 import NavBar from "./Components/ResponsiveNav/NavBar";
+import { ThemeProvider } from "./Components/ThemeContext/ThemeContext";
+import Theme from "./Components/ThemeContext/Theme";
 
 function App() {
   return (
@@ -52,7 +54,14 @@ function App() {
 
       {/* <ColorPicker /> */}
 
-      <NavBar />
+      {/* <NavBar /> */}
+
+      {/* <ThemeProvider>
+        <div>
+          <Theme />
+        </div>
+      </ThemeProvider> */}
+      console.log(<App />);
     </div>
   );
 }
