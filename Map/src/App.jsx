@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import ".././node_modules/leaflet/dist/leaflet.css";
+import markers from "./Components/Data";
+import { Icon } from "leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const position = [22.3039, 70.8022];
+
+  //to change position icon
+  const ccustomIcon = new Icon({
+    iconUrl:
+      "https://www.flaticon.com/download/icon/684908?icon_id=684908&author=227&team=227&keyword=Placeholder&pack=684899&style=Flat&style_id=6&format=png&color=%23000000&colored=1&size=512&selection=1&type=standard&search=location",
+    // iconUrl: require("../public/Img/marker.png"),
+    iconSize: [38, 38], //size in px
+  });
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <MapContainer
+      center={position}
+      zoom={13}
+      style={{ height: "100vh", width: "100%" }}
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <MarkerClusterGroup>
+        chunkedLoading
+        {markers.map((marker, index) => (
+          <Marker
+            key={index}
+            position={marker.geoCode}
+            // icon={ccustomIcon}
+          >
+            <Popup>{marker.popUp}</Popup>
+          </Marker>
+        ))}
+      </MarkerClusterGroup>
+    </MapContainer>
+  );
 }
 
-export default App
+export default App;
