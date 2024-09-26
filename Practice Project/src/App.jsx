@@ -19,11 +19,14 @@ import ColorPicker from "./Components/ColorPicker/ColorPicker";
 import NavBar from "./Components/ResponsiveNav/NavBar";
 import { ThemeProvider } from "./Components/ThemeContext/ThemeContext";
 import Theme from "./Components/ThemeContext/Theme";
+import Pagination2 from "./Components/Pagination2/Pagination2";
+import Index2 from "./Components/Accordian/Index2";
 
 function App() {
   return (
     <div>
       {/* Accordian */}
+      <Index2 />
       {/* <Accordian />  */}
 
       {/* Random Color generator */}
@@ -61,7 +64,9 @@ function App() {
           <Theme />
         </div>
       </ThemeProvider> */}
-      console.log(<App />);
+      {/* console.log(<App />); */}
+
+      {/* <Pagination2 /> */}
     </div>
   );
 }
