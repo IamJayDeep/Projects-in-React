@@ -4,14 +4,18 @@ export const QueryContext = createContext();
 
 export const MovieProvider = ({ children }) => {
   const [queries, setQueries] = useState([]);
+  const [info, setInfo] = useState({});
   const [input, setInput] = useState("");
+  const [getId, setGetId] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [className, setClassName] = useState("details-wrapper-off");
+
   const fetchData = async () => {
     try {
       const res = await fetch(
         `https://imdb.iamidiotareyoutoo.com/justwatch?q=${input}`
       );
-      // const res = await fetch(`http://www.omdbapi.com/?apikey=2533437b&t=star&plot=full`);
-      // console.log(res);
+
       const data = await res.json();
 
       //to remove the data that do not have image or information
@@ -21,20 +25,50 @@ export const MovieProvider = ({ children }) => {
       );
       console.log(finalData);
       setQueries(finalData);
+      setClassName("details-wrapper-off");
       // console.log(data.description);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+
+  const detailData = async () => {
+    await fetch(`http://www.omdbapi.com/?apikey=2533437b&i=${getId}&plot=full`)
+      .then((response) => response.json())
+      .then((data) => setInfo(data));
+  };
+
+  const handleClick = (e) => {
+    setGetId(e.currentTarget.id);
+    setClassName("details-wrapper-on");
+  };
+
   useEffect(() => {
     fetchData();
   }, [input]);
   useEffect(() => {
+    detailData();
+    setClassName("details-wrapper-off");
+  }, [getId, setInfo]);
+  useEffect(() => {
     console.log(queries);
     console.log(input);
-  }, [setInput]);
+    // console.log(getId);
+    // console.log(info);
+  }, [queries, input]);
   return (
-    <QueryContext.Provider value={{ queries, setQueries, setInput, input }}>
+    <QueryContext.Provider
+      value={{
+        queries,
+        setQueries,
+        setInput,
+        input,
+        setGetId,
+        info,
+        handleClick,
+        className,
+      }}
+    >
       {children}
     </QueryContext.Provider>
   );

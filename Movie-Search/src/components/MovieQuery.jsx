@@ -1,25 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import useQuery from "./MovieContext";
+import { Link } from "react-router-dom";
 
 function MovieQuery() {
-  const { queries } = useQuery();
+  const { queries, handleClick } = useQuery();
   console.log(queries);
   return (
-    <div className="overflow-x-auto hide-scrollbar">
-      <div className="flex">
+    <div className="overflow-y-auto hide-scrollbar">
+      <div className="flex flex-wrap justify-center items-start">
         {queries.map((query, i) => (
           <div key={i}>
             {query.type === "MOVIE" ? (
-              <div>
-                <div className="img-container rounded-md mx-3 mt-5 bg-zinc-800">
-                  <img
-                    src={query.photo_url[1]}
-                    alt={query.title}
-                    className="max-w-28 rounded-md md:max-w-60"
-                  />
-                  <div className="overlay">
-                    <span className="rounded-b-md">{`${query.title} (${query.year})`}</span>
-                  </div>
+              <div
+                role="button"
+                className="img-container rounded-md mx-3 mt-5 bg-zinc-800"
+              >
+                <img
+                  className="max-w-28 rounded-md md:max-w-40"
+                  src={query.photo_url[1]}
+                  alt={query.title}
+                  id={query.imdbId}
+                  onClick={handleClick}
+                />
+                <div className="overlay-sm md:overlay">
+                  <span className="rounded-b-md text-xs md:text-sm">{`${query.title} (${query.year})`}</span>
                 </div>
               </div>
             ) : (
