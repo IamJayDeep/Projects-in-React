@@ -6,7 +6,7 @@ function ShowQuery() {
 
   return (
     <div className="overflow-x-auto hide-scrollbar">
-      <div className="flex flex-shrink-0">
+      <div className="flex">
         {queries.map((query, i) => (
           <div
             key={i}

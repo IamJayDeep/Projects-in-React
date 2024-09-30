@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 
 function MovieQuery() {
   const { queries, handleClick } = useQuery();
-  console.log(queries);
   return (
-    <div className="overflow-y-auto hide-scrollbar">
-      <div className="flex flex-wrap justify-center items-start">
+    <div className="overflow-x-auto hide-scrollbar">
+      <div className="flex">
         {queries.map((query, i) => (
           <div key={i}>
             {query.type === "MOVIE" ? (

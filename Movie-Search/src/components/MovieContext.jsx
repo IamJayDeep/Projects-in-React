@@ -19,14 +19,11 @@ export const MovieProvider = ({ children }) => {
       const data = await res.json();
 
       //to remove the data that do not have image or information
-      console.log(data);
       const finalData = data.description.filter(
         (data) => data.photo_url.length > 0
       );
-      console.log(finalData);
       setQueries(finalData);
       setClassName("details-wrapper-off");
-      // console.log(data.description);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -50,12 +47,7 @@ export const MovieProvider = ({ children }) => {
     detailData();
     setClassName("details-wrapper-off");
   }, [getId, setInfo]);
-  useEffect(() => {
-    console.log(queries);
-    console.log(input);
-    // console.log(getId);
-    // console.log(info);
-  }, [queries, input]);
+
   return (
     <QueryContext.Provider
       value={{

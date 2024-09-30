@@ -4,12 +4,10 @@ import Offers from "./Offers";
 
 function Details() {
   const { info, queries, className, handleClick } = useQuery();
-  console.log(info);
-  console.log(queries);
 
   return (
     <div
-      className={`${className} border rounded-md bg-gray-400 backdrop-blur border-zinc-800 bg-opacity-80 absolute inset-0 overflow-auto max-h-screen md:inset-16 hide-scrollbar z-50`}
+      className={`${className} border rounded-md bg-gray-400 backdrop-blur border-zinc-800 bg-opacity-80 absolute inset-0 overflow-auto max-h-screen md:inset-16 hide-scrollbar z-50 md:px-4 lg:px-1`}
     >
       <div>
         <span
@@ -24,14 +22,20 @@ function Details() {
         </span>
       </div>
       <div className="flex flex-col">
-        <div className="flex justify-around px-3">
-          <div className="w-1/2 md:w-1/4 mt-4">
-            <img
-              className="w-full mx-auto my-3 rounded md:max-w-44"
-              src={info.Poster}
-            />
-          </div>
-          <div className="w-1/2  text-zinc-800 pl-3 my-auto mx-auto md:w-3/4 md:flex md:flex-row md:justify-between md:items-end md:mt-5">
+        <div className="flex justify-evenly px-3">
+          {queries
+            .filter((query) => query.imdbId === info.imdbID)
+            .map((query, j) => (
+              <div key={j} className="w-1/2 md:w-1/4 mt-4">
+                <img
+                  className="w-full mx-auto my-3 rounded md:max-w-60"
+                  src={query.photo_url[1]}
+                  alt={query.title}
+                />
+              </div>
+            ))}
+
+          <div className="w-1/2  text-zinc-800 pl-3 my-auto mx-auto md:hidden md:w-3/4 md:flex-row md:justify-between md:items-end md:mt-5 sm:mr-4">
             <div className="flex">
               <img
                 className="w-6 md:w-6 md:h-6"
@@ -61,16 +65,53 @@ function Details() {
               <span>Runtime: {info.Runtime}</span>
             </div>
           </div>
-          <div className="">
-            <p>1234</p>
+
+          {/* for Screen size md and above */}
+          <div className="hidden md:w-1/2 h-1/2 md:flex md:flex-col">
+            <div className="w-full h-full md:flex justify-between items-start text-zinc-800 my-auto mt-10">
+              <div className="flex">
+                <img
+                  className="w-6 md:w-6 md:h-6"
+                  src="https://img.icons8.com/fluency/48/star--v1.png"
+                  alt="star--v1"
+                />
+                <p className="text-base font-medium">: {info.imdbRating}/10</p>
+              </div>
+              <div className="metascore flex">
+                <img
+                  className="w-6 md:w-6"
+                  src="https://img.icons8.com/color/48/metascore.png"
+                  alt="metascore"
+                />
+                <p className="text-base font-medium">: {info.Metascore}</p>
+              </div>
+              <div className="text-base max-w-20 font-medium mt-3 md:m-0">
+                <span>Runtime: {info.Runtime}</span>
+              </div>
+            </div>
+            <div className="font-medium my-4">
+              <p className="text-base">
+                Genre:
+                <span className="text-zinc-800 text-base"> {info.Genre}</span>
+              </p>
+            </div>
+            <div className="font-medium mb-3">
+              <p className="text-base">
+                Storyline:
+                <span className="text-zinc-800 text-base md:line-clamp-3 lg:line-clamp-6">
+                  {" "}
+                  {info.Plot}
+                </span>
+              </p>
+            </div>
           </div>
         </div>
-        <hr className="hidden md:block mx-3 my-2 border-zinc-900" />
+        {/* <hr className="hidden md:block mx-3 my-2 border-zinc-900" /> */}
 
         <hr className="mx-3 my-2 border-zinc-900 md:mx-10" />
-        <h3 className="text-base text-center text-black font-bold">{`${info.Title} (${info.Year})`}</h3>
+        <h3 className="text-base text-center text-black font-bold sm:text-lg md:text-2xl">{`${info.Title} (${info.Year})`}</h3>
         <div className="mt-2 mb-1 md:mx-10">
-          <div className="text-sm mx-4 text-zinc-900 font-medium ">
+          <div className="text-sm mx-4 text-zinc-900 font-medium md:text-base">
             <p>
               Released:
               <span className="text-zinc-700"> {info.Released}</span>
@@ -92,7 +133,7 @@ function Details() {
               <span className="text-zinc-700"> {info.Rated}</span>
             </p>
           </div>
-          <div className="text-sm mx-4 mt-4 text-zinc-900 font-medium">
+          <div className="text-sm mx-4 mt-4 text-zinc-900 font-medium md:text-base">
             <p>
               Director:
               <span className="text-zinc-700"> {info.Director}</span>
@@ -106,15 +147,15 @@ function Details() {
               <span className="text-zinc-700"> {info.Actors}</span>
             </p>
           </div>
-          <div className="text-sm mx-4 mt-4 text-zinc-900 font-medium">
+          <div className="text-sm mx-4 mt-4 text-zinc-900 font-medium md:text-base">
             <p>
               Plot:
-              <span className="text-zinc-700 line-clamp-[10] md:line-clamp-none">
+              <span className="text-zinc-700 line-clamp-[10] md:line-clamp-none md:text-base">
                 {info.Plot}
               </span>
             </p>
           </div>
-          <div className="text-sm mx-4 mt-4 text-zinc-900 font-medium">
+          <div className="text-sm mx-4 mt-4 text-zinc-900 font-medium md:text-base">
             <p>
               Awards: <span className="text-zinc-700 ">{info.Awards}</span>
             </p>
@@ -125,22 +166,11 @@ function Details() {
           </div>
         </div>
         <hr className="mx-3 mt-2 mb-4 border-zinc-900 md:mx-10" />
-        <div className="mx-3">
-          <h3 className="text-center text-base font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-800 text-transparent bg-clip-text tracking-wide">
+        <div className="mx-3 mb-4">
+          <h3 className="text-center text-base font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-800 text-transparent bg-clip-text tracking-wide md:text-xl">
             Where to Watch...
           </h3>
-          <div>
-            <div className="flex">
-              <a
-                href="http://www.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img width="40" src="./Images/Prime.png" alt="" />
-              </a>
-              {/* <Offers /> */}
-            </div>
-          </div>
+          <Offers />
         </div>
       </div>
     </div>
