@@ -7,7 +7,6 @@ export const MovieProvider = ({ children }) => {
   const [info, setInfo] = useState({});
   const [input, setInput] = useState("");
   const [getId, setGetId] = useState("");
-  const [loading, setLoading] = useState(true);
   const [className, setClassName] = useState("details-wrapper-off");
 
   const fetchData = async () => {
@@ -23,7 +22,6 @@ export const MovieProvider = ({ children }) => {
         (data) => data.photo_url.length > 0
       );
       setQueries(finalData);
-      setClassName("details-wrapper-off");
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -58,6 +56,7 @@ export const MovieProvider = ({ children }) => {
         setGetId,
         info,
         handleClick,
+        setClassName,
         className,
       }}
     >
