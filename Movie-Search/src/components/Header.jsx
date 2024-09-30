@@ -3,7 +3,7 @@ import useQuery from "./MovieContext";
 import { BiSearch } from "react-icons/bi";
 
 function Header() {
-  const { input, setInput,setClassName } = useQuery();
+  const { input, setInput, setClassName } = useQuery();
   const handleChange = (e) => {
     setInput(e.target.value);
   };
@@ -12,11 +12,15 @@ function Header() {
     setInput(input);
   };
   return (
-    
     <div className="sticky top-0 left-0 w-full flex flex-col  justify-center items-center gap-4 md:flex-row md:justify-around z-10 bg-[#121212] py-5 backdrop-blur bg-opacity-75">
       <div>
-        <h2 className="text-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-800 text-transparent bg-clip-text tracking-wide md:text-3xl">
-          Movies & Shows Finder
+        <h2
+          className="text-[28px] font-bold bg-gradient-to-r from-cyan-500 to-blue-800 text-transparent bg-clip-text tracking-wide md:text-3xl"
+          style={{
+            textShadow: "2px 2px 0 rgba(255, 255, 255, 0.855) ",
+          }}
+        >
+          PopcornPlanet
         </h2>
       </div>
       <div className="flex items-center text-black">
