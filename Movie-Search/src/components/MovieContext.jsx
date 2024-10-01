@@ -29,7 +29,7 @@ export const MovieProvider = ({ children }) => {
 
   const detailData = async () => {
     await fetch(
-      `http://www.omdbapi.com/?apikey=${
+      `https://www.omdbapi.com/?apikey=${
         import.meta.env.VITE_API_KEY
       }&i=${getId}&plot=full`
     )
